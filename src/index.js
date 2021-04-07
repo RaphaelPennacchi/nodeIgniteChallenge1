@@ -61,15 +61,15 @@ app.post('/todos', checksExistsUserAccount, (request, response) => {
 
   const id = uuidv4();
 
-  user.todos.push({
+  const todoInfo = {
     id: id,
     title:  title,
-    deadline: new Date(deadline),
     done: false,
+    deadline: new Date(deadline),
     created_at: new Date()
-  })
-
-  return response.status(201).send();
+  }
+  user.todos.push(todoInfo)
+  return response.status(201).json(todoInfo);
 });
 
 app.put('/todos/:id', checksExistsUserAccount, (request, response) => {
